@@ -41,7 +41,7 @@ from collections import defaultdict
 from datetime import timedelta
 from typing import List, Dict, DefaultDict, Tuple, Any
 
-pgm_version = "2.20"
+pgm_version = "2.21"
 
 # keep trace of file/directory stats, extensions, and total number of directories processed
 #all_stats: Dict[str, Tuple] = {}
