@@ -44,11 +44,14 @@ from typing import List, Dict, DefaultDict, Tuple, Any
 pgm_version = "2.20"
 
 # keep trace of file/directory stats, extensions, and total number of directories processed
-all_stats: Dict[str, Tuple] = {}
-all_extensions: Dict[str, Dict] = {}
+#all_stats: Dict[str, Tuple] = {}
+all_stats = {}
+#all_extensions: Dict[str, Dict] = {}
+all_extensions = {}
 all_dir_count = 0
 all_exclude_count = 0
-all_regexpr_excludes: List[Any] = []
+#all_regexpr_excludes: List[Any] = []
+all_regexpr_excludes = []
 all_csv_list = []
 
 #############################################################################
@@ -103,7 +106,8 @@ def display_threaded_extensions() -> int:
 
     longest = ""
     longest_len = 0
-    combined: DefaultDict[str, int] = defaultdict(int)
+    #combined: DefaultDict[str, int] = defaultdict(int)
+    combined = defaultdict(int)
     for key in all_extensions:
         for val in all_extensions[key]:
             combined[val] += all_extensions[key][val]
@@ -153,7 +157,8 @@ def display_threaded_summary(unique_ext_count:int=0) -> Tuple[int, int]:
     err_count = 0
     dir_count = 0
     total_bytes = 0
-    stats_file_sizes: List[int] = []
+    #stats_file_sizes: List[int] = []
+    stats_file_sizes = []
 
     for entry in all_stats.keys():
         file_count += all_stats[entry][0]
@@ -405,7 +410,8 @@ def get_disk_usage(walker:tuple,ext:bool=False,verbose:bool=True,status:bool=Fal
                 all_exclude_count += 1
                 return
 
-    curr_exten_list: DefaultDict[str, int] = defaultdict(int)
+    #curr_exten_list: DefaultDict[str, int] = defaultdict(int)
+    curr_exten_list = defaultdict(int)
     longest_ext = ""
     total = 0
     dir_total = 0
