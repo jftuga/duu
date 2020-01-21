@@ -41,7 +41,7 @@ from collections import defaultdict
 from datetime import timedelta
 from typing import List, Dict, DefaultDict, Tuple, Any
 
-pgm_version = "2.21"
+pgm_version = "2.22"
 
 # keep trace of file/directory stats, extensions, and total number of directories processed
 #all_stats: Dict[str, Tuple] = {}
@@ -92,7 +92,7 @@ def fmt(n:float,precision:int=2,no_comma:bool=False) -> str:
     tmp = "%." + "%s" % (precision) + "f"
     if no_comma:
         return str(n)
-    return locale.format(tmp, n, grouping=True)
+    return locale.format_string(tmp, n, grouping=True)
 
 #############################################################################
 
