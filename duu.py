@@ -42,6 +42,7 @@ from datetime import timedelta
 from typing import List, Dict, DefaultDict, Tuple, Any
 
 pgm_version = "2.30"
+pgm_url = "https://github.com/jftuga/duu"
 
 # keep trace of file/directory stats, extensions, and total number of directories processed
 #all_stats: Dict[str, Tuple] = {}
@@ -513,7 +514,7 @@ def main() -> int:
     Returns:
         0 on success, 1 on error
     """
-    parser = argparse.ArgumentParser(description="Display directory disk usage in kilobytes, plus totals", epilog="Directory Usage Utility (duu), version: %s" % (pgm_version))
+    parser = argparse.ArgumentParser(description="Display directory disk usage in kilobytes, plus totals", epilog="Directory Usage Utility (duu), version: %s %s" % (pgm_version, pgm_url))
     parser.add_argument("dname", help="directory name", nargs="?", default=".")
     parser.add_argument("-b", "--bare", help="do not print summary or stats; useful for sorting when used exclusively", action="store_true")
     parser.add_argument("-e", "--ext", help="summarize file extensions", action="store_true")
