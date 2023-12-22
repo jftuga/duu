@@ -41,7 +41,7 @@ from collections import defaultdict
 from datetime import timedelta
 from typing import List, Dict, DefaultDict, Tuple, Any
 
-pgm_version = "2.22"
+pgm_version = "2.30"
 
 # keep trace of file/directory stats, extensions, and total number of directories processed
 #all_stats: Dict[str, Tuple] = {}
@@ -296,6 +296,16 @@ def display_file_stats(stats_file_sizes:list) -> None:
     else:
         print("stdev         : %s" % fmt(stdev,0))
 
+    try:
+        print("min           : %s" % fmt(min(stats_file_sizes),0))
+    except:
+        print("min           : N/A")
+
+    try:
+        print("max           : %s" % fmt(max(stats_file_sizes),0))
+    except:
+        print("max           : N/A")
+
 #############################################################################
 
 def display_runtime_statistics(time_start:float, time_end:float, file_count:int, dir_count:int, threads:int) -> None:
@@ -423,7 +433,7 @@ def get_disk_usage(walker:tuple,ext:bool=False,verbose:bool=True,status:bool=Fal
     dir_total = 0
     dir_count += 1
     all_dir_count += 1
-    current = 0
+    running = 0
     for name in files:
         if ext:
             # keep track of file extentions when -e is invoked
@@ -431,15 +441,16 @@ def get_disk_usage(walker:tuple,ext:bool=False,verbose:bool=True,status:bool=Fal
             curr_exten_list[tmp] += 1
         fullname = join(root,name)
         try:
-            current += getsize(fullname)
+            current = getsize(fullname)
+            running += current
             if stats:
                 stats_file_sizes.append(current)
             file_count += 1
         except:
             safe_print("Error: unable to read: %s" % fullname, isError=True)
             err_count += 1
-    total += current
-    dir_total += current
+    total += running
+    dir_total += running
     
     if human:
         if verbose: safe_print("%s\t%s" % (convert_size(dir_total), root))
